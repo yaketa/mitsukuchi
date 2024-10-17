@@ -1,30 +1,37 @@
 import React from 'react';
+import LoadingAnimation from './LoadingAnimation';
 
-interface GeneratedReviewProps {
-  review: string;
-  onRegenerate: () => void;
-  onCopy: () => void;
-}
+const GeneratedReview = ({ review, onRegenerate, onCopy, isLoading }) => {
+  const buttonBaseClass = "flex-1 px-4 py-3 rounded-md text-lg font-semibold transition duration-300";
+  const buttonActiveClass = "bg-gray-600 text-white hover:bg-gray-700";
+  const buttonDisabledClass = "bg-gray-400 text-gray-200 cursor-not-allowed";
 
-const GeneratedReview: React.FC<GeneratedReviewProps> = ({ review, onRegenerate, onCopy }) => {
   return (
     <div className="mt-8">
-      <div className="p-4 bg-gray-100 rounded-md mb-6">
-        <h3 className="text-lg font-semibold text-teal-800 mb-2">生成された口コミ</h3>
-        <p className="text-gray-700">{review || '口コミはまだ生成されていません。'}</p>
+      <div className="p-4 bg-gray-100 rounded-md mb-6 min-h-[150px]">
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">生成された口コミ</h3>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-24">
+            <LoadingAnimation />
+          </div>
+        ) : (
+          <pre className="whitespace-pre-wrap text-gray-700 font-sans text-base">
+            {review || '口コミはまだ生成されていません。'}
+          </pre>
+        )}
       </div>
       <div className="flex space-x-4">
         <button
           onClick={onRegenerate}
-          className="flex-1 px-4 py-3 bg-teal-600 text-white rounded-md text-lg font-semibold hover:bg-teal-700 transition duration-300"
-          // ボタンを常に有効にする
+          className={`${buttonBaseClass} ${review && !isLoading ? buttonActiveClass : buttonDisabledClass}`}
+          disabled={!review || isLoading}
         >
-          {review ? '再生成' : '生成'}
+          {isLoading ? '生成中...' : '再生成'}
         </button>
         <button
           onClick={onCopy}
-          className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
-          disabled={!review} // 口コミがない場合はコピーを無効にする
+          className={`${buttonBaseClass} ${review && !isLoading ? buttonActiveClass : buttonDisabledClass}`}
+          disabled={!review || isLoading}
         >
           コピー
         </button>
