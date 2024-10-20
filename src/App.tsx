@@ -4,6 +4,7 @@ import ReviewForm from './components/ReviewForm';
 import GeneratedReview from './components/GeneratedReview';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UsageGuide from './components/UsageGuide';
 
 interface ReviewFormData {
   therapistName: string;
@@ -154,7 +155,8 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="flex-grow container mx-auto px-4 py-6 space-y-6">
+      <UsageGuide />
         <div className="bg-white rounded-lg shadow-xl p-6 max-w-md mx-auto">
           <ReviewForm
             formData={formData}

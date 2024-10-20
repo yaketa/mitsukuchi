@@ -111,7 +111,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ formData, setFormData, onSubmit
         </div>
       </div>
       <div className="space-y-1">
-        <label htmlFor="specialNote" className={labelClass}>特筆すべき点</label>
+        <label htmlFor="specialNote" className={labelClass}>特に良かったところ（自由記入）</label>
         <textarea
           id="specialNote"
           name="specialNote"
